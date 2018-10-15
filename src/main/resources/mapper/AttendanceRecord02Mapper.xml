@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.AttendanceRecord02Dao">
+    <resultMap id="AttendanceRecord02Map" type="com.example.demo.model.AttendanceRecord02">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="work_number" property="workNumber" jdbcType="INTEGER"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="start_time" property="startTime" jdbcType="TIMESTAMP"/>
+        <result column="end_time" property="endTime" jdbcType="TIMESTAMP"/>
+        <result column="hours" property="hours" jdbcType="DOUBLE"/>
+        <result column="start_position" property="startPosition" jdbcType="VARCHAR"/>
+        <result column="end_position" property="endPosition" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="tb">
+        attendance_record02
+    </sql>
+
+    <sql id="cols_exclude_id">
+    work_number, type, start_time, end_time, hours, start_position, end_position
+    </sql>
+
+    <sql id="cols_all">
+        id,
+        <include refid="cols_exclude_id"/>
+    </sql>
+
+    <sql id="vals">
+    #{workNumber},#{type},#{startTime},#{endTime},#{hours},#{startPosition},#{endPosition}
+    </sql>
+
+    <sql id="criteria">
+        <where>1=1
+            <if test="id != null">AND id = #{id}</if>
+            <if test="workNumber != null">AND work_number = #{workNumber}</if>
+            <if test="type != null">
+                AND type = #{type}
+            </if>
+            <if test="searchStartDate != null">AND start_time &gt; #{searchStartDate}</if>
+            <if test="searchEndDate != null">AND end_time &lt; #{searchEndDate}</if>
+        </where>
+    </sql>
+
+    <select id="list" parameterType="map" resultMap="AttendanceRecord02Map">
+        SELECT
+        <include refid="cols_all"/>
+        FROM
+        <include refid="tb"/>
+        <include refid="criteria"/>
+        order by id desc
+    </select>
+
+    <insert id="create" parameterType="com.example.demo.model.AttendanceRecord02" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO
+        <include refid="tb"/>
+        (<include refid="cols_exclude_id"/>)
+        VALUES
+        (<include refid="vals"/>)
+    </insert>
+
+    <insert id="creates" parameterType="list" useGeneratedKeys="true">
+        INSERT INTO
+        <include refid="tb"/>
+        (<include refid="cols_exclude_id"/>)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.workNumber}, #{item.type}, #{item.startTime}, #{item.endTime}, #{item.hours}, #{item.startPosition}, #{item.endPosition})
+        </foreach>
+    </insert>
+</mapper>
