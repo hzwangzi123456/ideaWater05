@@ -53,8 +53,8 @@ public class AttendanceRecord02Tests extends BaseTest {
 
         List<AttendanceRecord02> attendanceRecord02s = new ArrayList<>();
 
-        String startDate = "2017-01-01 00:00:00";
-        for (int i = 0; i < 500; i++) {
+        String startDate = "2016-01-01 00:00:00";
+        for (int i = 0; i < 800; i++) {
             if(isWorkEnd(startDate)) {
                 //后一天
                 startDate = DateUtil.getDiffMinuteDateStr02(startDate, (int) (60 * 24));

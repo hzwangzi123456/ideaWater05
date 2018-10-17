@@ -50,7 +50,8 @@
         order by id desc
     </select>
 
-    <insert id="create" parameterType="com.example.demo.model.AttendanceRecord02" keyProperty="id" useGeneratedKeys="true">
+    <insert id="create" parameterType="com.example.demo.model.AttendanceRecord02" keyProperty="id"
+            useGeneratedKeys="true">
         INSERT INTO
         <include refid="tb"/>
         (<include refid="cols_exclude_id"/>)
@@ -64,7 +65,8 @@
         (<include refid="cols_exclude_id"/>)
         VALUES
         <foreach collection="list" item="item" index="index" separator=",">
-            (#{item.workNumber}, #{item.type}, #{item.startTime}, #{item.endTime}, #{item.hours}, #{item.startPosition}, #{item.endPosition})
+            (#{item.workNumber}, #{item.type}, #{item.startTime}, #{item.endTime}, #{item.hours}, #{item.startPosition},
+            #{item.endPosition})
         </foreach>
     </insert>
 </mapper>
