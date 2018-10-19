@@ -26,7 +26,7 @@
     </sql>
 
     <sql id="vals">
-    #{workNumber},#{type},#{startTime},#{endTime},#{hours},#{startPosition},#{endPosition}
+      #{workNumber},#{type},#{startTime},#{endTime},#{hours},#{startPosition},#{endPosition}
     </sql>
 
     <sql id="criteria">

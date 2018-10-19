@@ -16,5 +16,4 @@ public interface AttendanceRecord02WriteService {
      * @return 创建是否成功
      */
     boolean attendanceRecord02Create(AttendanceRecord02CrtDto dto);
-
 }

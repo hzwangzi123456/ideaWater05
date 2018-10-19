@@ -9,6 +9,5 @@ import java.util.List;
  * @Author: wangzi
  * @Date: 2018/10/12 14:43
  */
-@Component
 public interface AttendanceRecord02Dao extends BaseDao<AttendanceRecord02> {
 }

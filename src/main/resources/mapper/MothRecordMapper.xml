@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.MonthRecordDao">
+    <resultMap id="MothRecordMap" type="com.example.demo.model.MonthRecord">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="year_month" property="yearMonth" jdbcType="VARCHAR"/>
+        <result column="should_attendance" property="shouldAttendance" jdbcType="INTEGER"/>
+        <result column="actual_attendacne" property="actualAttendacne" jdbcType="INTEGER"/>
+        <result column="work_number" property="workNumber" jdbcType="INTEGER"/>
+        <result column="work_address" property="workAddress" jdbcType="VARCHAR"/>
+        <result column="iselapunch" property="iselapunch" jdbcType="INTEGER"/>
+        <result column="work_outside" property="workOutside" jdbcType="INTEGER"/>
+        <result column="business_trip" property="businessTrip" jdbcType="INTEGER"/>
+        <result column="casual_leave" property="casualLeave" jdbcType="INTEGER"/>
+        <result column="days_off" property="daysOff" jdbcType="INTEGER"/>
+        <result column="sick_leave" property="sickLeave" jdbcType="INTEGER"/>
+        <result column="annual_leave" property="annualLeave" jdbcType="INTEGER"/>
+        <result column="overtime_num" property="overtimeNum" jdbcType="INTEGER"/>
+        <result column="late_early_num" property="lateEarlyNum" jdbcType="INTEGER"/>
+        <result column="late_early_hours" property="lateEarlyHours" jdbcType="INTEGER"/>
+        <result column="forget_punch_num" property="forgetPunchNum" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="tb">
+        month_record
+    </sql>
+
+    <sql id="cols_exclude_id">
+        year_month, should_attendance, actual_attendacne, work_number, work_address,
+        iselapunch, work_outside, business_trip, casual_leave, days_off, sick_leave, annual_leave,
+        overtime_num, late_early_num, late_early_hours, forget_punch_num
+    </sql>
+
+    <sql id="vals">
+        #{yearMonth,jdbcType=VARCHAR}, #{shouldAttendance,jdbcType=INTEGER},
+        #{actualAttendacne,jdbcType=INTEGER}, #{workNumber,jdbcType=INTEGER}, #{workAddress,jdbcType=VARCHAR},
+        #{iselapunch,jdbcType=INTEGER}, #{workOutside,jdbcType=INTEGER}, #{businessTrip,jdbcType=INTEGER},
+        #{casualLeave,jdbcType=INTEGER}, #{daysOff,jdbcType=INTEGER}, #{sickLeave,jdbcType=INTEGER},
+        #{annualLeave,jdbcType=INTEGER}, #{overtimeNum,jdbcType=INTEGER}, #{lateEarlyNum,jdbcType=INTEGER},
+        #{lateEarlyHours,jdbcType=INTEGER}, #{forgetPunchNum,jdbcType=INTEGER}
+    </sql>
+
+    <insert id="create" parameterType="com.example.demo.model.MonthRecord" keyProperty="id"
+            useGeneratedKeys="true">
+        INSERT INTO
+        <include refid="tb"/>
+        (<include refid="cols_exclude_id"/>)
+        VALUES
+        (<include refid="vals"/>)
+    </insert>
+
+    <insert id="creates" parameterType="list" useGeneratedKeys="true">
+        INSERT INTO
+        <include refid="tb"/>
+        (<include refid="cols_exclude_id"/>)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.yearMonth,jdbcType=VARCHAR}, #{item.shouldAttendance,jdbcType=INTEGER},
+            #{item.actualAttendacne,jdbcType=INTEGER}, #{item.workNumber,jdbcType=INTEGER}, #{item.workAddress,jdbcType=VARCHAR},
+            #{item.iselapunch,jdbcType=INTEGER}, #{item.workOutside,jdbcType=INTEGER}, #{item.businessTrip,jdbcType=INTEGER},
+            #{item.casualLeave,jdbcType=INTEGER}, #{item.daysOff,jdbcType=INTEGER}, #{item.sickLeave,jdbcType=INTEGER},
+            #{item.annualLeave,jdbcType=INTEGER}, #{item.overtimeNum,jdbcType=INTEGER}, #{item.lateEarlyNum,jdbcType=INTEGER},
+            #{item.lateEarlyHours,jdbcType=INTEGER}, #{item.forgetPunchNum,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+</mapper>
