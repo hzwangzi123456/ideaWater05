@@ -32,10 +32,13 @@ public class AttendanceRecord02Controller {
     private AttendanceRecord02ReadService attendanceRecord02ReadService;
 
     @RequestMapping(value = "/getAttendanceRecord02List",produces = MediaType.APPLICATION_JSON_VALUE + CHARSET)
-    public List<AttendanceRecord02> getAttendanceRecord02List(AttendanceRecord02ListDto attendanceRecord02ListDto) {
+    public List<AttendanceRecord02> getAttendanceRecord02List(AttendanceRecord02ListDto dto) {
 //      log.info("[AttendanceRecord02Controller] receive getAttendanceRecord02List request.");
-        List<AttendanceRecord02> attendanceRecord02List = attendanceRecord02ReadService.getAttendanceRecord02List(attendanceRecord02ListDto);
+        dto.setSearchEndDate(dto.getSearchYearMonth().trim() + "-31 23:59:59");
+        dto.setSearchStartDate(dto.getSearchYearMonth().trim() + "-01 00:00:00");
+        List<AttendanceRecord02> attendanceRecord02List = attendanceRecord02ReadService.getAttendanceRecord02List(dto);
 //      log.info("[AttendanceRecord02Controller] finish getAttendanceRecord02List request.");
         return attendanceRecord02List;
     }
+
 }

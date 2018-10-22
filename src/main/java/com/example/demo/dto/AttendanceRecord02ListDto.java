@@ -24,4 +24,9 @@ public class AttendanceRecord02ListDto {
      * 查询结束时间
      */
     private String searchEndDate;
+
+    /**
+     * 查询年月
+     */
+    private String searchYearMonth;
 }

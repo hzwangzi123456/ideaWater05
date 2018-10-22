@@ -17,7 +17,7 @@
     </sql>
 
     <sql id="cols_exclude_id">
-    work_number, type, start_time, end_time, hours, start_position, end_position
+    `work_number`, `type`, `start_time`, `end_time`, `hours`, `start_position`, `end_position`
     </sql>
 
     <sql id="cols_all">
