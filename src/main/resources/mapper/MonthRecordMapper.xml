@@ -83,6 +83,6 @@
         FROM
         <include refid="tb"/>
         <include refid="queryCondition"/>
---         order by year_month desc
+        order by year_month_num desc
     </select>
 </mapper>
